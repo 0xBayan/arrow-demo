@@ -7,6 +7,7 @@ import argparse, threading, time, warnings
 
 import numpy as np
 import pandas as pd
+import os, sys
 import psutil
 from pyspark.sql import SparkSession
 
@@ -20,6 +21,9 @@ console = Console()
 ARROW = "spark.sql.execution.arrow.pyspark.enabled"
 BARS = "▁▂▃▄▅▆▇█"
 
+os.environ["PYSPARK_PYTHON"] = sys.executable
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
+os.environ["SPARK_LOCAL_IP"] = "127.0.0.1"
 
 # ---------- resource monitor (Python process + JVM child, sampled in a thread) ----------
 class Monitor:
